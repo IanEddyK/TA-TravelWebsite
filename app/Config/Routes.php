@@ -51,6 +51,7 @@ $routes->get('/logout', 'Site::logout');
 $routes->post('/chart-transaction', 'Admin::showBooksChart');
 $routes->post('/chart-customer', 'Admin::showCustomerChart');
 
+$routes->get('/admin', 'Admin::index', ['filter' => 'authGuard']);
 $routes->get('/invoices', 'Admin::invoices');
 $routes->get('/deleteinvoice/(:num)', 'Admin::deleteInvoice/$1');
 $routes->get('/users', 'Admin::users');

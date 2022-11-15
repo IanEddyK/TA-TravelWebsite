@@ -7,8 +7,9 @@ use CodeIgniter\Cookie\Cookie;
 
 class Login extends BaseController
 {
-    
-    public function index(){
+
+    public function index()
+    {
         session();
         $data = [
             'title' => 'Login | Travel.com',
@@ -25,7 +26,7 @@ class Login extends BaseController
         $email = $this->request->getVar('email');
         $password = $this->request->getVar('password');
         $user = $userModel->where('email', $email)->first();
-        
+
         if ($user) {
             $role = $user['role'];
             if ($role == 1) {
@@ -57,7 +58,6 @@ class Login extends BaseController
                         'email' => $user['email'],
                         'phone' => $user['no_telp'],
                         'role' => $user['role'],
-                        'LoggedIn' => true,
                     ];
                     $session->set($sess_data);
                     return redirect()->to(base_url())->with('logged', 'Logged In');
@@ -68,7 +68,7 @@ class Login extends BaseController
             }
         } else {
             $session->setFlashdata('msg', "Email doesn't exist");
-                return redirect()->to('/login');
+            return redirect()->to('/login');
         }
     }
 }

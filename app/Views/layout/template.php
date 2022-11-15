@@ -36,5 +36,22 @@
     <!-- SwiperJS -->
     <script type="module" src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.0/jquery.js"></script>
+
+    <script>
+        function addDays() {
+            var arrivals = new Date($('#arrivals').val());
+            arrivals.setDate(arrivals.getDate() +3);
+            var leaving = arrivals.toISOString().split('T')[0];
+            document.getElementById('leaving').value = leaving;
+        }
+        
+        // var arrivals = $('#arrivals').val;
+
+        // console.log(arrivals.addDays(2));
+        
+    </script>
 </body>
 </html>

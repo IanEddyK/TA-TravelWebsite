@@ -53,11 +53,11 @@
             </div>
             <div class="inputBox">
                 <span>arrivals/flight date:</span>
-                <input type="date" name="arrivals">
+                <input type="date" id="arrivals" onchange="addDays()" name="arrivals">
             </div>
             <div class="inputBox">
                 <span>leaving :</span>
-                <input type="date" name="leaving">
+                <input type="date" id="leaving" disabled name="leaving">
             </div>
             <?php if(session()->getFlashdata('error')):?>
                 <div style="text-align: center;" class="alert">
