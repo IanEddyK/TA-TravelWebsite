@@ -9,9 +9,9 @@
 
 <div class="booking">
     <div class="heading-title">Book your trip!</div>
-    <?php if(session()->getFlashdata('msg')):?>
+    <?php if (session()->getFlashdata('msg')) : ?>
         <div style="text-align: center;" class="alert">
-          <h2><?= session()->getFlashdata('msg'); ?></h2>
+            <h2><?= session()->getFlashdata('msg'); ?></h2>
         </div>
     <?php endif; ?>
     <form class="book-form" action="/Site/savebook/<?= $_SESSION['email']; ?>" method="post">
@@ -57,11 +57,11 @@
             </div>
             <div class="inputBox">
                 <span>leaving :</span>
-                <input type="date" id="leaving" disabled name="leaving">
+                <input type="date" id="leaving" readonly name="leaving">
             </div>
-            <?php if(session()->getFlashdata('error')):?>
+            <?php if (session()->getFlashdata('error')) : ?>
                 <div style="text-align: center;" class="alert">
-                <h2><?= session()->getFlashdata('error'); ?></h2>
+                    <h2><?= session()->getFlashdata('error'); ?></h2>
                 </div>
             <?php endif; ?>
         </div>

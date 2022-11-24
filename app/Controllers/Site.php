@@ -13,7 +13,7 @@ class Site extends BaseController
     {
         $this->DBModel = new DBModel();
         $this->packageModel = new PackageModel();
-        $this->bookModel = new BookModel(); 
+        $this->bookModel = new BookModel();
         $this->db = \Config\Database::connect();
     }
 
@@ -26,7 +26,7 @@ class Site extends BaseController
         ];
         return view('/pages/home', $data);
     }
-    
+
     public function home()
     {
         $user = $this->DBModel->findUser($_SESSION['email']);
@@ -45,7 +45,7 @@ class Site extends BaseController
         ];
         return view('/pages/about', $data);
     }
-    
+
     public function package()
     {
         $data = [
@@ -89,7 +89,7 @@ class Site extends BaseController
     public function bookform()
     {
         $location = $this->request->getVar('location');
-        
+
         $data = [
             'name' => $this->request->getVar('name'),
             'email' => $this->request->getVar('email'),
@@ -106,7 +106,8 @@ class Site extends BaseController
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
     }
 
-    public function details($email){
+    public function details($email)
+    {
         $user = $this->DBModel->findUser($email);
         if ($user) {
             if (Time::now()->isAfter($user['arrivals'])) {
@@ -148,9 +149,9 @@ class Site extends BaseController
             $OldDate = Time::parse($user['arrivals']);
             $newDate = Time::parse($this->request->getVar('arrivals'));
             if ($newDate->isBefore($OldDate)) {
-                session()->setFlashdata('msg', "You currently having a reservation, please <a href='/site/details/".$email."' onclick='return confirm('Are you sure for canceling your reservation?')'>cancel</a> first");
-            } elseif($newDate->isAfter($OldDate)){
-                $this->DBModel->delete($email);
+                session()->setFlashdata('msg', "You currently having a reservation, please <a href='/site/details/" . $email . "' onclick='return confirm('Are you sure for canceling your reservation?')'>cancel</a> first");
+            } elseif ($OldDate->isBefore($newDate)) {
+                $this->DBModel->where('email', $email)->delete();
                 $this->DBModel->save([
                     'name' => $this->request->getVar('name'),
                     'email' => $this->request->getVar('email'),
@@ -164,7 +165,7 @@ class Site extends BaseController
                     'created_at' => Time::now(),
                 ]);
                 session()->setFlashdata('msg', "Reservation updated");
-                return redirect()->to(base_url('/site/details/'.$email));
+                return redirect()->to(base_url('/site/details/' . $email));
             }
         } else {
             $this->DBModel->save([
@@ -180,7 +181,7 @@ class Site extends BaseController
                 'created_at' => Time::now(),
             ]);
             session()->setFlashdata('msg', "Reservation success");
-            return redirect()->to(base_url('/site/details/'.$email));
+            return redirect()->to(base_url('/site/details/' . $email));
         }
     }
 
@@ -189,6 +190,6 @@ class Site extends BaseController
 
         $data['user'] = $this->DBModel->where('email', $email)->delete();
         echo "<script type='text/javascript'>alert('Reservation canceled')</script>";
-        return redirect()->to( base_url() );
+        return redirect()->to(base_url());
     }
 }

@@ -90,8 +90,8 @@
             // Access transaction data
             function getTransaction() {
                 var year = $('#year').val();
-                url: "/chart-transaction",
                 $.ajax({
+                    url: "/chart-transaction",
                     method:"post",
                     data: {
                         year: year

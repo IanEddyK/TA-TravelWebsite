@@ -10,7 +10,7 @@ class DBModel extends Model
     protected $primaryKey = "id_book";
     protected $useTimestamps = false;
     protected $allowedFields = ["id_book", "name", "email", "phone", "address", "location", "guests", "arrivals", "leaving", "created_at"];
-     
+
     public function findUser($email)
     {
         return $this->where(['email' => $email])->first();
@@ -24,10 +24,10 @@ class DBModel extends Model
     public function getTransaction($year)
     {
         return $this->db->table('book_form as bf')
-        ->select('MONTH(bf.created_at) month, p.price price')
-        ->join('packages p', 'location')
-        ->where('YEAR(bf.created_at)', $year)
-        ->orderBy('MONTH(bf.created_at)')
-        ->get()->getResultArray();
+            ->select('MONTH(bf.created_at) month, p.price price')
+            ->join('packages p', 'location')
+            ->where('YEAR(bf.created_at)', $year)
+            ->orderBy('MONTH(bf.created_at)')
+            ->get()->getResultArray();
     }
 }

@@ -16,6 +16,7 @@ class Admin extends BaseController
     protected $adminModel;
     public function __construct()
     {
+        $this->adminModel = new AdminModel;
         $this->packageModel = new PackageModel;
         $this->bookModel = new DBModel;
         $this->userModel = new UserModel;
